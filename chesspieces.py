@@ -34,66 +34,365 @@ def loadimage(chess,pg,screen):
     else:
         chessimage=pg.transform.scale(chessimage,(80,80))
         screen.blit(chessimage,((chess.location[0]-1)*100+10,(chess.location[1]-1)*100+10))
-def validmoves (chess,board):
+def WpawnValid(chess,board):
+    validmove=[]
+    k1=0
+    check1=[chess.location[0]+1,chess.location[1]]
+    for chessb in board:
+        if(check1==chessb.location):
+            k1=1
+            break
+    if check1[0]<1 or check1[1]>8 or check1[0]>8 or check1[1]<1:
+            k1=1
+    if(k1==0):
+        validmove.append(check1)
+    print(k1)
+    check2=[chess.location[0]+2,chess.location[1]]
+    k2=1
+    if(chess.location[0]==2):
+        k2=0
+        for chessb in board:
+            if(check2==chessb.location):
+                k2=1
+                break
+    if check2[0]<1 or check2[1]>8 or check2[0]>8 or check2[1]<1:
+            k2=1
+    if(k2==0):
+        validmove.append(check2)
+
+    check3=[chess.location[0]+1,chess.location[1]+1]
+    check4=[chess.location[0]+1,chess.location[1]-1]
+    for chessb in board:
+        if check3==chessb.location and chessb.name[0]=="B":
+            validmove.append(check3)
+            break
+        if check4==chessb.location and chessb.name[0]=="B":
+            validmove.append(check4)
+            break  
+    return validmove      
+def BpawnValid(chess,board):
+    validmove=[]
+    k1=0
+    check1=[chess.location[0]-1,chess.location[1]]
+    for chessb in board:
+        if(check1==chessb.location):
+            k1=1
+            break
+    if check1[0]<1 or check1[1]>8 or check1[0]>8 or check1[1]<1:
+            k1=1
+    if(k1==0):
+        validmove.append(check1)
+    print(k1)
+    check2=[chess.location[0]-2,chess.location[1]]
+    k2=1
+    if(chess.location[0]==7):
+        k2=0
+        for chessb in board:
+            if(check2==chessb.location):
+                k2=1
+                break
+    if check2[0]<1 or check2[1]>8 or check2[0]>8 or check2[1]<1:
+            k2=1
+    if(k2==0):
+        validmove.append(check2)
+    check3=[chess.location[0]-1,chess.location[1]+1]
+    check4=[chess.location[0]-1,chess.location[1]-1]
+    for chessb in board:
+        if check3==chessb.location and chessb.name[0]=="W":
+            validmove.append(check3)
+            break
+        if check4==chessb.location and chessb.name[0]=="W":
+            validmove.append(check4)
+            break  
+    return validmove  
+def WrookValid(chess,board):
+    validmove=[]
+    k1=k2=k3=k4=0
+    for i in range(1,7):
+        check1=[chess.location[0]+i,chess.location[1]]
+        check2=[chess.location[0]-i,chess.location[1]]
+        check3=[chess.location[0],chess.location[1]+i]
+        check4=[chess.location[0],chess.location[1]-i]
+        for chessb in board:
+            if chessb.location==check1 and chessb.name[0]=="B":
+                validmove.append(check1)
+                k1=1
+            if chessb.location==check1 and chessb.name[0]=="W":
+                k1=1
+            if chessb.location==check2 and chessb.name[0]=="B":
+                validmove.append(check2)
+                k2=1
+            if chessb.location==check2 and chess.name[0]=="W":
+                k2=1
+            if chessb.location==check3 and chessb.name[0]=="B":
+                validmove.append(check3)
+                k3=1
+            if chessb.location==check3 and chessb.name[0]=="W":
+                k3=1
+            if chessb.location==check4 and chessb.name[0]=="B":
+                validmove.append(check4)
+                k4=1
+            if chessb.location==check4 and chessb.name[0]=="W":
+                k4=1
+        if check1[0]<1 or check1[1]>8 or check1[0]>8 or check1[1]<1:
+            k1=1
+        if check2[0]<1 or check2[1]>8 or check2[0]>8 or check2[1]<1:
+            k2=1
+        if check3[0]<1 or check3[1]>8 or check3[0]>8 or check3[1]<1:
+            k3=1
+        if check4[0]<1 or check4[1]>8 or check4[0]>8 or check4[1]<1:
+            k4=1
+        if k1==0:
+            validmove.append(check1)
+        if k2==0:
+            validmove.append(check2)
+        if k3==0:
+            validmove.append(check3)
+        if k4==0:
+            validmove.append(check4)
+    return validmove
+def BrookValid(chess,board):
+    validmove=[]
+    k1=k2=k3=k4=0
+    for i in range(1,7):
+        check1=[chess.location[0]+i,chess.location[1]]
+        check2=[chess.location[0]-i,chess.location[1]]
+        check3=[chess.location[0],chess.location[1]+i]
+        check4=[chess.location[0],chess.location[1]-i]
+        for chessb in board:
+            if chessb.location==check1 and chessb.name[0]=="W":
+                validmove.append(check1)
+                k1=1
+            if chessb.location==check1 and chessb.name[0]=="B":
+                k1=1
+            if chessb.location==check2 and chessb.name[0]=="W":
+                validmove.append(check2)
+                k2=1
+            if chessb.location==check2 and chessb.name[0]=="B":
+                k2=1
+            if chessb.location==check3 and chessb.name[0]=="W":
+                validmove.append(check3)
+                k3=1
+            if chessb.location==check3 and chessb.name[0]=="B":
+                k3=1
+            if chessb.location==check4 and chessb.name[0]=="W":
+                validmove.append(check4)
+                k4=1
+            if chessb.location==check4 and chessb.name[0]=="B":
+                k4=1
+        if check1[0]<1 or check1[1]>8 or check1[0]>8 or check1[1]<1:
+            k1=1
+        if check2[0]<1 or check2[1]>8 or check2[0]>8 or check2[1]<1:
+            k2=1
+        if check3[0]<1 or check3[1]>8 or check3[0]>8 or check3[1]<1:
+            k3=1
+        if check4[0]<1 or check4[1]>8 or check4[0]>8 or check4[1]<1:
+            k4=1
+        if k1==0:
+            validmove.append(check1)
+        if k2==0:
+            validmove.append(check2)
+        if k3==0:
+            validmove.append(check3)
+        if k4==0:
+            validmove.append(check4)
+    return validmove
+def WbishopValid(chess,board):
+    validmove=[]
+    k1=k2=k3=k4=0
+    for i in range(1,7):
+        check1=[chess.location[0]+i,chess.location[1]+i]
+        check2=[chess.location[0]+i,chess.location[1]-i]
+        check3=[chess.location[0]-i,chess.location[1]+i]
+        check4=[chess.location[0]-i,chess.location[1]-i]
+        for chessb in board:
+            if chessb.location==check1 and chessb.name[0]=="B":
+                validmove.append(check1)
+                k1=1
+            if chessb.location==check1 and chessb.name[0]=="W":
+                k1=1
+            if chessb.location==check2 and chessb.name[0]=="B":
+                validmove.append(check2)
+                k2=1
+            if chessb.location==check2 and chess.name[0]=="W":
+                k2=1
+            if chessb.location==check3 and chessb.name[0]=="B":
+                validmove.append(check3)
+                k3=1
+            if chessb.location==check3 and chessb.name[0]=="W":
+                k3=1
+            if chessb.location==check4 and chessb.name[0]=="B":
+                validmove.append(check4)
+                k4=1
+            if chessb.location==check4 and chessb.name[0]=="W":
+                k4=1
+        if check1[0]<1 or check1[1]>8 or check1[0]>8 or check1[1]<1:
+            k1=1
+        if check2[0]<1 or check2[1]>8 or check2[0]>8 or check2[1]<1:
+            k2=1
+        if check3[0]<1 or check3[1]>8 or check3[0]>8 or check3[1]<1:
+            k3=1
+        if check4[0]<1 or check4[1]>8 or check4[0]>8 or check4[1]<1:
+            k4=1
+        if k1==0:
+            validmove.append(check1)
+        if k2==0:
+            validmove.append(check2)
+        if k3==0:
+            validmove.append(check3)
+        if k4==0:
+            validmove.append(check4)
+    return validmove
+def BbishopValid(chess,board):
+    validmove=[]
+    k1=k2=k3=k4=0
+    for i in range(1,7):
+        check1=[chess.location[0]+i,chess.location[1]+i]
+        check2=[chess.location[0]+i,chess.location[1]-i]
+        check3=[chess.location[0]-i,chess.location[1]+i]
+        check4=[chess.location[0]-i,chess.location[1]-i]
+        for chessb in board:
+            if chessb.location==check1 and chessb.name[0]=="W":
+                validmove.append(check1)
+                k1=1
+            if chessb.location==check1 and chessb.name[0]=="B":
+                k1=1
+            if chessb.location==check2 and chessb.name[0]=="W":
+                validmove.append(check2)
+                k2=1
+            if chessb.location==check2 and chessb.name[0]=="B":
+                k2=1
+            if chessb.location==check3 and chessb.name[0]=="W":
+                validmove.append(check3)
+                k3=1
+            if chessb.location==check3 and chessb.name[0]=="B":
+                k3=1
+            if chessb.location==check4 and chessb.name[0]=="W":
+                validmove.append(check4)
+                k4=1
+            if chessb.location==check4 and chessb.name[0]=="B":
+                k4=1
+        if check1[0]<1 or check1[1]>8 or check1[0]>8 or check1[1]<1:
+            k1=1
+        if check2[0]<1 or check2[1]>8 or check2[0]>8 or check2[1]<1:
+            k2=1
+        if check3[0]<1 or check3[1]>8 or check3[0]>8 or check3[1]<1:
+            k3=1
+        if check4[0]<1 or check4[1]>8 or check4[0]>8 or check4[1]<1:
+            k4=1
+        if k1==0:
+            validmove.append(check1)
+        if k2==0:
+            validmove.append(check2)
+        if k3==0:
+            validmove.append(check3)
+        if k4==0:
+            validmove.append(check4)
+    return validmove
+def WKingValid(chess,board):
+    validmove=[]
+    validmovess=[]
+    validmove.append([chess.location[0]+1,chess.location[1]])
+    validmove.append([chess.location[0]+1,chess.location[1]+1])
+    validmove.append([chess.location[0]+1,chess.location[1]-1])
+    validmove.append([chess.location[0]-1,chess.location[1]])
+    validmove.append([chess.location[0]-1,chess.location[1]+1])
+    validmove.append([chess.location[0]-1,chess.location[1]-1])
+    validmove.append([chess.location[0],chess.location[1]+1])
+    validmove.append([chess.location[0],chess.location[1]-1])
+    for move in validmove:
+        if move[0]>0 and move[0]<9 and move[1]>0 and move[1]<9:
+            validmovess.append(move)
+        for chessb in board:
+                if chessb.location == move and chessb.name[0]=="W":
+                    validmovess.remove(move)
+                    break
+    return validmovess
+def BKingValid(chess,board):
+    validmove=[]
+    validmovess=[]
+    validmove.append([chess.location[0]+1,chess.location[1]])
+    validmove.append([chess.location[0]+1,chess.location[1]+1])
+    validmove.append([chess.location[0]+1,chess.location[1]-1])
+    validmove.append([chess.location[0]-1,chess.location[1]])
+    validmove.append([chess.location[0],chess.location[1]+1])
+    validmove.append([chess.location[0],chess.location[1]-1])
+    validmove.append([chess.location[0]-1,chess.location[1]+1])
+    validmove.append([chess.location[0]-1,chess.location[1]-1])
+    for move in validmove:
+        if move[0]>0 and move[0]<9 and move[1]>0 and move[1]<9:
+            validmovess.append(move)
+        for chessb in board:
+                if chessb.location == move and chessb.name[0]=="B":
+                    validmovess.remove(move)
+                    break
+    return validmovess
+def WknightValid(chess,board):
+    validmove=[]
+    validmovess=[]
+    validmove.append([chess.location[0]+2,chess.location[1]+1])
+    validmove.append([chess.location[0]+2,chess.location[1]-1])
+    validmove.append([chess.location[0]-2,chess.location[1]+1])
+    validmove.append([chess.location[0]-2,chess.location[1]-1])
+    validmove.append([chess.location[0]+1,chess.location[1]+2])
+    validmove.append([chess.location[0]-1,chess.location[1]+2])
+    validmove.append([chess.location[0]+1,chess.location[1]-2])
+    validmove.append([chess.location[0]-1,chess.location[1]-2])
+    for move in validmove:
+        if move[0]>0 and move[0]<9 and move[1]>0 and move[1]<9:
+            validmovess.append(move)
+        for chessb in board:
+                if chessb.location == move and chessb.name[0]=="W":
+                    validmovess.remove(move)
+                    break
+    return validmovess
+def BknightValid(chess,board):
+    validmove=[]
+    validmovess=[]
+    validmove.append([chess.location[0]+2,chess.location[1]+1])
+    validmove.append([chess.location[0]+2,chess.location[1]-1])
+    validmove.append([chess.location[0]-2,chess.location[1]+1])
+    validmove.append([chess.location[0]-2,chess.location[1]-1])
+    validmove.append([chess.location[0]+1,chess.location[1]+2])
+    validmove.append([chess.location[0]-1,chess.location[1]+2])
+    validmove.append([chess.location[0]+1,chess.location[1]-2])
+    validmove.append([chess.location[0]-1,chess.location[1]-2])
+    for move in validmove:
+        if move[0]>0 and move[0]<9 and move[1]>0 and move[1]<9:
+            validmovess.append(move)
+        for chessb in board:
+                if chessb.location == move and chessb.name[0]=="B":
+                    validmovess.remove(move)
+                    break
+    return validmovess
+def validmoves(chess,board):
     validmove=[]
     if(chess.name=="Wpawn"):
-        k1=0
-        check1=[chess.location[0]+1,chess.location[1]]
-        for chessb in board:
-            if(check1==chessb.location):
-                k1=1
-                break
-        if(k1==0):
-            validmove.append(check1)
-        print(k1)
-        check2=[chess.location[0]+2,chess.location[1]]
-        k2=1
-        if(chess.location[0]==2):
-            k2=0
-            for chessb in board:
-                if(check2==chessb.location):
-                    k2=1
-                    break
-        if(k2==0):
-            validmove.append(check2)
-
-        check3=[chess.location[0]+1,chess.location[1]+1]
-        check4=[chess.location[0]+1,chess.location[1]-1]
-        for chessb in board:
-                if check3==chessb.location and chessb.name[0]=="B":
-                    validmove.append(check3)
-                    break
-                if check4==chessb.location and chessb.name[0]=="B":
-                    validmove.append(check4)
-                    break
+        validmove=WpawnValid(chess,board)
     if(chess.name=="Bpawn"):
-        k1=0
-        check1=[chess.location[0]-1,chess.location[1]]
-        for chessb in board:
-            if(check1==chessb.location):
-                k1=1
-                break
-        if(k1==0):
-            validmove.append(check1)
-        print(k1)
-        check2=[chess.location[0]-2,chess.location[1]]
-        k2=1
-        if(chess.location[0]==7):
-            k2=0
-            for chessb in board:
-                if(check2==chessb.location):
-                    k2=1
-                    break
-        if(k2==0):
-            validmove.append(check2)
-        check3=[chess.location[0]-1,chess.location[1]+1]
-        check4=[chess.location[0]-1,chess.location[1]-1]
-        for chessb in board:
-                if check3==chessb.location and chessb.name[0]=="W":
-                    validmove.append(check3)
-                    break
-                if check4==chessb.location and chessb.name[0]=="W":
-                    validmove.append(check4)
-                    break
-    return validmove       
+        validmove=BpawnValid(chess,board)
+    if(chess.name=="Wrook"):
+        validmove=WrookValid(chess,board)
+    if(chess.name=="Brook"):
+        validmove=BrookValid(chess,board)
+    if(chess.name=="Wbishop"):
+        validmove=WbishopValid(chess,board)
+    if(chess.name=="Bbishop"):
+        validmove=BbishopValid(chess,board)
+    if(chess.name=="WQueen"):
+        validmove=WrookValid(chess,board)
+        validmove.extend(WbishopValid(chess,board))
+    if(chess.name=="BQueen"):
+        validmove=BrookValid(chess,board)
+        validmove.extend(BbishopValid(chess,board))
+    if(chess.name=="BKing"):
+        validmove=BKingValid(chess,board)
+    if(chess.name=="WKing"):
+        validmove=WKingValid(chess,board)
+    if(chess.name=="Wknight"):
+        validmove=WknightValid(chess,board)   
+    if(chess.name=="Bknight"):
+        validmove=BknightValid(chess,board)  
+    return validmove
+
 
