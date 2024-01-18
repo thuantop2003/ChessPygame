@@ -22,7 +22,7 @@ def drawboard(pg, screen):
     pg.draw.rect(screen, 'gray',[0,800,1000,100])
     pg.draw.rect(screen, 'gold',[0,800,1000,100],5)
     pg.draw.rect(screen, 'gold',[800,0,200,1000],5)
-    status_text=['white select','white move','black select','black']
+    status_text=['white select','white move','black select','black move']
     screen.blit(font.render(status_text[turn_selection],True,'black'),(20,820))
 def loadimage(t):
     # Fix the path string and use double backslashes or a raw string
@@ -39,15 +39,40 @@ def load_chess():
     for chess in board:
         loadimage(chess)
 valid_moves=[]
+def draw_game_over():
+    text=font.render(f'{winner} won the game', True,'blue')
+    text2=font.render(f'press Enter to restart', True,'blue')
+    screen.blit(text,(210,210))
+    screen.blit(text2,(210,310))
+def checking():
+    a=0
+    b=0
+    for p in board:
+        if p.name=="WKing":
+            a=1
+        if p.name=="BKing":
+            b=1
+    return [a,b]
+print(checking())
 while run:
     timer.tick(fps)
     screen.fill('dark gray')
     drawboard(pg,screen)
     load_chess()
+    if checking()[0]==0 or checking()[1]==0:
+        if(checking()[0]==0):
+            winner="Black"
+        else:
+            winner="White"
+        draw_game_over()
     for event in pg.event.get():
         if event.type == pg.QUIT:
             run = False
-        if event.type == pg.MOUSEBUTTONDOWN and event.button ==1:
+        if event.type==pg.KEYDOWN and (checking()[0]==0 or checking()[1]==0):
+            if event.key==pg.K_RETURN:
+                board=board=cp.makeBoard()
+                turn_selection=0
+        if event.type == pg.MOUSEBUTTONDOWN and event.button ==1 and checking()[0]!=0 and checking()[1]!=0:
             x_coord=event.pos[0]//100
             y_coord=event.pos[1]//100
             click_coord=[8-y_coord,8-x_coord]

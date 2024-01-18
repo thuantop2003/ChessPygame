@@ -1,3 +1,4 @@
+import copy
 class Chess:
     def __init__(self,name,location):
         self.name=name
@@ -46,7 +47,6 @@ def WpawnValid(chess,board):
             k1=1
     if(k1==0):
         validmove.append(check1)
-    print(k1)
     check2=[chess.location[0]+2,chess.location[1]]
     k2=1
     if(chess.location[0]==2):
@@ -82,7 +82,6 @@ def BpawnValid(chess,board):
             k1=1
     if(k1==0):
         validmove.append(check1)
-    print(k1)
     check2=[chess.location[0]-2,chess.location[1]]
     k2=1
     if(chess.location[0]==7):
@@ -108,28 +107,28 @@ def BpawnValid(chess,board):
 def WrookValid(chess,board):
     validmove=[]
     k1=k2=k3=k4=0
-    for i in range(1,7):
+    for i in range(1,8):
         check1=[chess.location[0]+i,chess.location[1]]
         check2=[chess.location[0]-i,chess.location[1]]
         check3=[chess.location[0],chess.location[1]+i]
         check4=[chess.location[0],chess.location[1]-i]
         for chessb in board:
-            if chessb.location==check1 and chessb.name[0]=="B":
+            if k1==0 and chessb.location==check1 and chessb.name[0]=="B":
                 validmove.append(check1)
                 k1=1
             if chessb.location==check1 and chessb.name[0]=="W":
                 k1=1
-            if chessb.location==check2 and chessb.name[0]=="B":
+            if k2==0 and chessb.location==check2 and chessb.name[0]=="B":
                 validmove.append(check2)
                 k2=1
             if chessb.location==check2 and chess.name[0]=="W":
                 k2=1
-            if chessb.location==check3 and chessb.name[0]=="B":
+            if k3==0 and chessb.location==check3 and chessb.name[0]=="B":
                 validmove.append(check3)
                 k3=1
             if chessb.location==check3 and chessb.name[0]=="W":
                 k3=1
-            if chessb.location==check4 and chessb.name[0]=="B":
+            if k4==0 and chessb.location==check4 and chessb.name[0]=="B":
                 validmove.append(check4)
                 k4=1
             if chessb.location==check4 and chessb.name[0]=="W":
@@ -154,28 +153,28 @@ def WrookValid(chess,board):
 def BrookValid(chess,board):
     validmove=[]
     k1=k2=k3=k4=0
-    for i in range(1,7):
+    for i in range(1,8):
         check1=[chess.location[0]+i,chess.location[1]]
         check2=[chess.location[0]-i,chess.location[1]]
         check3=[chess.location[0],chess.location[1]+i]
         check4=[chess.location[0],chess.location[1]-i]
         for chessb in board:
-            if chessb.location==check1 and chessb.name[0]=="W":
+            if k1==0 and chessb.location==check1 and chessb.name[0]=="W":
                 validmove.append(check1)
                 k1=1
             if chessb.location==check1 and chessb.name[0]=="B":
                 k1=1
-            if chessb.location==check2 and chessb.name[0]=="W":
+            if k2==0 and chessb.location==check2 and chessb.name[0]=="W":
                 validmove.append(check2)
                 k2=1
-            if chessb.location==check2 and chessb.name[0]=="B":
+            if chessb.location==check2 and chess.name[0]=="B":
                 k2=1
-            if chessb.location==check3 and chessb.name[0]=="W":
+            if k3==0 and chessb.location==check3 and chessb.name[0]=="W":
                 validmove.append(check3)
                 k3=1
             if chessb.location==check3 and chessb.name[0]=="B":
                 k3=1
-            if chessb.location==check4 and chessb.name[0]=="W":
+            if k4==0 and chessb.location==check4 and chessb.name[0]=="W":
                 validmove.append(check4)
                 k4=1
             if chessb.location==check4 and chessb.name[0]=="B":
@@ -200,28 +199,28 @@ def BrookValid(chess,board):
 def WbishopValid(chess,board):
     validmove=[]
     k1=k2=k3=k4=0
-    for i in range(1,7):
+    for i in range(1,8):
         check1=[chess.location[0]+i,chess.location[1]+i]
         check2=[chess.location[0]+i,chess.location[1]-i]
         check3=[chess.location[0]-i,chess.location[1]+i]
         check4=[chess.location[0]-i,chess.location[1]-i]
         for chessb in board:
-            if chessb.location==check1 and chessb.name[0]=="B":
+            if k1==0 and chessb.location==check1 and chessb.name[0]=="B":
                 validmove.append(check1)
                 k1=1
             if chessb.location==check1 and chessb.name[0]=="W":
                 k1=1
-            if chessb.location==check2 and chessb.name[0]=="B":
+            if k2==0 and chessb.location==check2 and chessb.name[0]=="B":
                 validmove.append(check2)
                 k2=1
             if chessb.location==check2 and chess.name[0]=="W":
                 k2=1
-            if chessb.location==check3 and chessb.name[0]=="B":
+            if k3==0 and chessb.location==check3 and chessb.name[0]=="B":
                 validmove.append(check3)
                 k3=1
             if chessb.location==check3 and chessb.name[0]=="W":
                 k3=1
-            if chessb.location==check4 and chessb.name[0]=="B":
+            if k4==0 and chessb.location==check4 and chessb.name[0]=="B":
                 validmove.append(check4)
                 k4=1
             if chessb.location==check4 and chessb.name[0]=="W":
@@ -246,28 +245,28 @@ def WbishopValid(chess,board):
 def BbishopValid(chess,board):
     validmove=[]
     k1=k2=k3=k4=0
-    for i in range(1,7):
+    for i in range(1,8):
         check1=[chess.location[0]+i,chess.location[1]+i]
         check2=[chess.location[0]+i,chess.location[1]-i]
         check3=[chess.location[0]-i,chess.location[1]+i]
         check4=[chess.location[0]-i,chess.location[1]-i]
         for chessb in board:
-            if chessb.location==check1 and chessb.name[0]=="W":
+            if k1==0 and chessb.location==check1 and chessb.name[0]=="W":
                 validmove.append(check1)
                 k1=1
             if chessb.location==check1 and chessb.name[0]=="B":
                 k1=1
-            if chessb.location==check2 and chessb.name[0]=="W":
+            if k2==0 and chessb.location==check2 and chessb.name[0]=="W":
                 validmove.append(check2)
                 k2=1
-            if chessb.location==check2 and chessb.name[0]=="B":
+            if chessb.location==check2 and chess.name[0]=="B":
                 k2=1
-            if chessb.location==check3 and chessb.name[0]=="W":
+            if k3==0 and chessb.location==check3 and chessb.name[0]=="W":
                 validmove.append(check3)
                 k3=1
             if chessb.location==check3 and chessb.name[0]=="B":
                 k3=1
-            if chessb.location==check4 and chessb.name[0]=="W":
+            if k4==0 and chessb.location==check4 and chessb.name[0]=="W":
                 validmove.append(check4)
                 k4=1
             if chessb.location==check4 and chessb.name[0]=="B":
@@ -344,7 +343,6 @@ def WknightValid(chess,board):
         for chessb in board:
                 if chessb.location == move and chessb.name[0]=="W":
                     validmovess.remove(move)
-                    break
     return validmovess
 def BknightValid(chess,board):
     validmove=[]
@@ -363,7 +361,6 @@ def BknightValid(chess,board):
         for chessb in board:
                 if chessb.location == move and chessb.name[0]=="B":
                     validmovess.remove(move)
-                    break
     return validmovess
 def validmoves(chess,board):
     validmove=[]
@@ -394,5 +391,97 @@ def validmoves(chess,board):
     if(chess.name=="Bknight"):
         validmove=BknightValid(chess,board)  
     return validmove
-
+def heuBoard(board):
+    h={}
+    h["Wpawn"]=-1
+    h["Wrook"]=-5
+    h["Wbishop"]=-3
+    h["Wknight"]=-3
+    h["WQueen"]=-9
+    h["WKing"]=-1000
+    h["Bpawn"]=1
+    h["Brook"]=5
+    h["Bbishop"]=3
+    h["Bknight"]=3
+    h["BQueen"]=9
+    h["BKing"]=1000
+    sum=0
+    for chess in board:
+        sum=sum+h[chess.name]
+    return sum
+def makeChildrenB(board):
+    children=[]
+    for chess in board:
+        if chess.name[0]=="B":
+            for move in validmoves(chess,board):
+                board1 = copy.deepcopy(board)
+                for c in board1:
+                    if move ==c.location:
+                        board1.remove(c)
+                        break
+                for c in board1:
+                    if chess.location==c.location:
+                        c.location=move
+                        break
+                children.append(board1)
+    return children
+def makeChildrenW(board):
+    children=[]
+    for chess in board:
+        if chess.name[0]=="W":
+            for move in validmoves(chess,board):
+                board1 = copy.deepcopy(board)
+                for c in board1:
+                    if move ==c.location:
+                        board1.remove(c)
+                        break
+                for c in board1:
+                    if chess.location==c.location:
+                        c.location=move
+                        break
+                children.append(board1)
+    return children
+def pChildren(board,i,x,y):
+    if i==4:
+        return [board,heuBoard(board)]
+    if i%2==1:
+        maxx=-10000
+        for b in makeChildrenB(board):
+            if(heuBoard(b)>500):
+                return [b,heuBoard(b)]
+            if(heuBoard(b)<-500):
+                return [b,heuBoard(b)]
+            a=pChildren(b,i+1,x,y)[1]
+            if a>maxx:
+                maxx=a
+                sb=b
+            if maxx>=x:
+                return [sb,maxx]
+            if y<maxx:
+                y=maxx
+        return [sb,maxx]
+    if i%2==0:
+        minn=10000
+        for b in makeChildrenW(board):
+            if(heuBoard(b)<-500):
+                return [b,heuBoard(b)]
+            if(heuBoard(b)>500):
+                return [b,heuBoard(b)]
+            a=pChildren(b,i+1,x,y)[1]
+            if a<minn:
+                minn=a
+                sb=b
+            if minn<=y:
+                return [sb,minn]
+            if x>minn:
+                x=minn
+        return [sb,minn]
+def makeMove(board):
+    x=pChildren(board,1,1000,-1000)
+    sboard=x[0]
+    return sboard
+def makeMoveW(board):
+    x=pChildren(board,2,1000,-1000)
+    sboard=x[0]
+    return sboard
 

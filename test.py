@@ -1,6 +1,8 @@
 
 import chesspieces as cp
 board=cp.makeBoard();
-chess = cp.Chess("Wknight",[1,7])
-print(cp.WknightValid(chess,board))
-print(cp.validmoves(chess,board))
+def areBoardsEqual(board1, board2):
+    return all(chess1.name == chess2.name and chess1.location == chess2.location
+               for chess1, chess2 in zip(board1, board2))
+print(areBoardsEqual(board,cp.makeMove(board)))
+    
