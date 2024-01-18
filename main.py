@@ -95,6 +95,7 @@ while run:
                     for chess in board:
                         if(click_coord==chess.location):
                             board.remove(chess)
+                    for chess in board:
                         if(chess.location[0]==selection.location[0] and chess.location[1]==selection.location[1]):
                             chess.location=click_coord
                     turn_selection=2;
